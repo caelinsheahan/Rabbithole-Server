@@ -6,7 +6,9 @@ const port = process.env.PORT
 var io = require('socket.io')()
 var Stopwatch = require('timer-stopwatch');
 var timer = new Stopwatch(600000)
+var cors = require('cors')
 
+app.use(cors())
 io.set('origins', '*:*')
 io.on('connection', (client) => {
   client.on('subscribeToTimer', (interval) => {
