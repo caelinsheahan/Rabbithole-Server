@@ -7,6 +7,7 @@ var io = require('socket.io')()
 var Stopwatch = require('timer-stopwatch');
 var timer = new Stopwatch(600000)
 
+io.set('origins', '*:*')
 io.on('connection', (client) => {
   client.on('subscribeToTimer', (interval) => {
     timer.start()
