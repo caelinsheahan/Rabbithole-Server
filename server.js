@@ -2,8 +2,7 @@ const express = require('express')
 const app = express()
 const http = require("http")
 const port = process.env.PORT
-
-var io = require('socket.io')()
+var io = require('socket.io').listen(app)
 var Stopwatch = require('timer-stopwatch');
 var timer = new Stopwatch(600000)
 var cors = require('cors')
