@@ -4,8 +4,7 @@ const path = require('path');
 
 const PORT = process.env.PORT || 3000;
 const INDEX = path.join(__dirname, 'index.html');
-var Stopwatch = require('timer-stopwatch');
-var timer = new Stopwatch(600000)
+
 const server = express()
   .use((req, res) => res.sendFile(INDEX) )
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
@@ -30,4 +29,4 @@ socket.on('topic', function(msg){
 });
 });
 
-setInterval(() => io.emit('timer', timer.ms, 1000);
+setInterval(() => io.emit('time', new Date().toTimeString()), 1000);
