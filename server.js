@@ -11,30 +11,9 @@ const server = express()
 
 const io = socketIO(server);
 
-io.on('connection', (client) => {
-  client.on('subscribeToTimer', (interval) => {
-    timer.start()
-    console.log('client is subscribing to timer with interval ', interval);
-    setInterval(() => {
-      client.emit('timer', timer.ms);
-    }, interval);
-  });
+io.on('connection', (socket) => {
+  console.log('Client connected');
+  socket.on('disconnect', () => console.log('Client disconnected'));
 });
 
-io.on('connection', function(socket){
-  socket.on('vote1', function(msg){
-    io.emit('vote1', msg);
-  });
-  socket.on('vote2', function(msg){
-    io.emit('vote2', msg);
-  });
-  socket.on('response1', function(msg){
-    io.emit('response1', msg);
-  });
-  socket.on('response2', function(msg){
-    io.emit('response2', msg);
-  });
-  socket.on('topic', function(msg){
-    io.emit('topic', msg);
-  });
-});
+setInterval(() => io.emit('time', new Date().toTimeString()), 1000);
