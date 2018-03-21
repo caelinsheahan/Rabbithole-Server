@@ -12,6 +12,12 @@ const server = express()
 const io = socketIO(server);
 
 io.on('connection', (socket) => {
+  socket.on('submitted', function(msg){
+  io.emit('submitted', msg);
+});
+socket.on('voted', function(msg){
+io.emit('voted', msg);
+});
   socket.on('vote1', function(msg){
   io.emit('vote1', msg);
 });
